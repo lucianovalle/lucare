@@ -1,0 +1,1 @@
+enum Grandeza { COMPRIMIDO, ML }
