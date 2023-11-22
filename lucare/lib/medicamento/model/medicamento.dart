@@ -3,12 +3,12 @@ import 'package:lucare/shared/models/grandeza.dart';
 class Medicamento {
   int id = 0;
   String nome = '';
-  late DateTime validade;
+  String validade = '';
   String descricao = '';
   int quantidade = 0;
   String foto = '';
   late Grandeza grandeza;
-  late int utilizado;
+  late int utilizado = 0;
   String principio = '';
 
   Map<String, dynamic> toMap() {
@@ -16,7 +16,7 @@ class Medicamento {
       "nome": nome,
       "quantidade": quantidade,
       "utilizado": utilizado,
-      "vencimento": validade.toString(),
+      "validade": validade,
       "grandeza": grandeza.name,
       "principio": principio.toString(),
       "descricao": descricao.toString()
@@ -27,7 +27,7 @@ class Medicamento {
 
   void setNome(String nome) => this.nome = nome;
 
-  void setValidade(DateTime validade) => this.validade = validade;
+  void setValidade(String validade) => this.validade = validade;
 
   void setDescricao(String descricao) => this.descricao = descricao;
 

@@ -24,7 +24,7 @@ class MedicamentoTile extends StatelessWidget {
         isThreeLine: true,
         title: Text(medicamento.nome),
         subtitle: Text(
-            'Princípio ativo: ${medicamento.principio}\nValidade:  ${format.format(medicamento.validade)} \nQuantidade: ${medicamento.quantidade} - ${medicamento.grandeza.name}'),
+            'Princípio ativo: ${medicamento.principio}\nValidade:  ${medicamento.validade} \nQuantidade: ${medicamento.quantidade} - ${medicamento.grandeza.name}'),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

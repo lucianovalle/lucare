@@ -9,8 +9,8 @@ import 'package:lucare/services/http_interceptors.dart';
 class MedicamentosService {
   Logger logger = Logger();
 
-  static const String url =
-      "http://ec2-3-21-129-50.us-east-2.compute.amazonaws.com:8080/medicamentos";
+  static const String url = "http://localhost:8080/medicamentos";
+  //"http://ec2-3-21-129-50.us-east-2.compute.amazonaws.com:8080/medicamentos";
 
   http.Client client =
       InterceptedClient.build(interceptors: [LoggingInterceptor()]);

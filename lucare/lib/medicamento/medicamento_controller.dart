@@ -26,7 +26,7 @@ abstract class _MedicamentoController with Store {
     var m1 = Medicamento();
     m1.setId(1);
     m1.setNome('Levotiroxina');
-    m1.setValidade(DateTime.now());
+    //m1.setValidade(DateTime.now());
     m1.setPrincipio("");
     m1.setQuantidade(30);
     m1.setGrandeza(Grandeza.COMPRIMIDO);
@@ -35,7 +35,7 @@ abstract class _MedicamentoController with Store {
     var m2 = Medicamento();
     m2.setId(2);
     m2.setNome('Novalgina');
-    m2.setValidade(DateTime.now());
+    //m2.setValidade(DateTime.now());
     m2.setPrincipio("");
     m2.setQuantidade(60);
     m2.setGrandeza(Grandeza.ML);

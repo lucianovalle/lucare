@@ -7,16 +7,16 @@ import 'package:lucare/shared/app_module.dart';
 import 'package:lucare/shared/models/grandeza.dart';
 
 void main() {
-  //MedicamentosService service = MedicamentosService();
-  //service.consltarMedicamentos();
-  // Medicamento medicamento = Medicamento();
-  // medicamento.nome = "teste 22";
-  // medicamento.grandeza = Grandeza.COMPRIMIDO;
-  // medicamento.quantidade = 35;
-  // medicamento.utilizado = 15;
-  // medicamento.descricao = "Utilizado para febre";
-  // medicamento.validade = DateTime.now();
-  // service.incluirMedicamento(medicamento);
+  MedicamentosService service = MedicamentosService();
+  service.consltarMedicamentos();
+  Medicamento medicamento = Medicamento();
+  medicamento.nome = "teste ee";
+  medicamento.grandeza = Grandeza.COMPRIMIDO;
+  medicamento.quantidade = 33;
+  medicamento.utilizado = 15;
+  medicamento.descricao = "Utilizado";
+  medicamento.validade = "10/12/2025"; //DateTime.now()"";
+  service.incluirMedicamento(medicamento);
 
   runApp(
     ModularApp(
