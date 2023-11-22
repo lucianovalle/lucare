@@ -11,6 +11,16 @@ class Medicamento {
   late int utilizado = 0;
   String principio = '';
 
+  Medicamento.empty()
+      : nome = '',
+        validade = '',
+        descricao = '',
+        quantidade = 0,
+        foto = '',
+        grandeza = Grandeza.COMPRIMIDO,
+        utilizado = 0,
+        principio = '';
+
   Map<String, dynamic> toMap() {
     return {
       "nome": nome,
@@ -22,6 +32,16 @@ class Medicamento {
       "descricao": descricao.toString()
     };
   }
+
+  Medicamento.fromMap(Map<String, dynamic> map)
+      : id = map["id"],
+        nome = map["nome"],
+        utilizado = map["utilizado"],
+        quantidade = map["quantidade"],
+        validade = map["validade"],
+        grandeza = Grandeza.values.byName(map["grandeza"]),
+        principio = map["principio"],
+        descricao = map["descricao"];
 
   void setId(int id) => this.id = id;
 

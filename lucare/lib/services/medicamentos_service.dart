@@ -27,19 +27,20 @@ class MedicamentosService {
     return false;
   }
 
-  Future<String> consltarMedicamentos() async {
-    //http.Response response = await http.get(Uri.parse(url));
-    // print(response.body.toString());
-    //return response.body;
-
+  Future<List<Medicamento>> consltarMedicamentos() async {
     final headers = {"Content-type": "application/json"};
     final response = await client.get(Uri.parse(url), headers: headers);
 
     if (response.statusCode == 200) {
-      return response.body;
-      // return Materia.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+      List<Medicamento> lista = [];
+      List<dynamic> listaDynamic = json.decode(utf8.decode(response.bodyBytes));
+      for (var jsonMAp in listaDynamic) {
+        lista.add(Medicamento.fromMap(jsonMAp));
+      }
+
+      return lista;
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('falhou na busca de medicamentos');
     }
   }
 }

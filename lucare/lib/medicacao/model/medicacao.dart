@@ -4,7 +4,7 @@ import 'package:lucare/medicamento/model/medicamento.dart';
 class Medicacao {
   int id = 0;
   Consulta consulta = Consulta();
-  Medicamento medicamento = Medicamento();
+  Medicamento medicamento = Medicamento.empty();
   DateTime inicio = DateTime.now();
   int quantidade = 0;
   int hora = 0;

@@ -52,31 +52,17 @@ class _MedicamentoFormState extends State<MedicamentoForm> {
       return;
     }
 
-    Medicamento medicamento = Medicamento();
+    Medicamento medicamento = Medicamento.empty();
     medicamento.nome = _controllerNome.value.text;
     Grandeza grandeza = Grandeza.values.byName(_grandezaSelecionada!);
     medicamento.grandeza = grandeza;
     medicamento.quantidade = int.parse(_controllerQuantidade.value.text);
     medicamento.principio = _controllerPrincipio.value.text;
     medicamento.descricao = _controllerDescricao.value.text;
-
-    // String dateWithT =
-    //     "${_controllerData.value.text.substring(6, 10)}-${_controllerData.value.text.substring(3, 5)}-${_controllerData.value.text.substring(0, 2)}T00:00:00.000000Z";
-    // DateTime parseDate =
-    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(dateWithT);
     medicamento.validade = _controllerData.value.text;
 
     service.incluirMedicamento(medicamento);
-
-    //_formKey.currentState!.save();
-    //controller.salva();
-
-    //Navigator.of(context).pop();
     Modular.to.pop();
-
-    /*ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Medicamento salvo!')),
-    );*/
   }
 
   @override
@@ -86,11 +72,10 @@ class _MedicamentoFormState extends State<MedicamentoForm> {
 
     if (medicamento != null) {
       controller.setMedicamento(medicamento);
-      //_formData['validade'] = format.format(medicamento.validade);
       _formData['grandeza'] = medicamento.grandeza.name;
       _formData['quantidade'] = medicamento.quantidade.toString();
     } else {
-      controller.setMedicamento(Medicamento());
+      controller.setMedicamento(Medicamento.empty());
     }
 
     return Scaffold(

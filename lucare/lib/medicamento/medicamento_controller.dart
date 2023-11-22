@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:lucare/medicamento/model/medicamento.dart';
+import 'package:lucare/services/medicamentos_service.dart';
 import 'package:lucare/shared/models/grandeza.dart';
 import 'package:mobx/mobx.dart';
 
@@ -11,7 +12,7 @@ class MedicamentoController = _MedicamentoController
 
 abstract class _MedicamentoController with Store {
   @observable
-  Medicamento medicamento = Medicamento();
+  Medicamento medicamento = Medicamento.empty();
 
   @observable
   ObservableList<Medicamento> medicamentos =
@@ -23,7 +24,7 @@ abstract class _MedicamentoController with Store {
 
   @action
   consultaMedicamentos() {
-    var m1 = Medicamento();
+    var m1 = Medicamento.empty();
     m1.setId(1);
     m1.setNome('Levotiroxina');
     //m1.setValidade(DateTime.now());
@@ -32,7 +33,7 @@ abstract class _MedicamentoController with Store {
     m1.setGrandeza(Grandeza.COMPRIMIDO);
     medicamentos.add(m1);
 
-    var m2 = Medicamento();
+    var m2 = Medicamento.empty();
     m2.setId(2);
     m2.setNome('Novalgina');
     //m2.setValidade(DateTime.now());
@@ -40,6 +41,28 @@ abstract class _MedicamentoController with Store {
     m2.setQuantidade(60);
     m2.setGrandeza(Grandeza.ML);
     medicamentos.add(m2);
+  }
+
+  @action
+  consultaMedicamentosAdd(List<Medicamento> lista) {
+    // var m1 = Medicamento.empty();
+    // m1.setId(1);
+    // m1.setNome('Levotiroxina');
+    // //m1.setValidade(DateTime.now());
+    // m1.setPrincipio("");
+    // m1.setQuantidade(30);
+    // m1.setGrandeza(Grandeza.COMPRIMIDO);
+    // medicamentos.add(m1);
+
+    // var m2 = Medicamento.empty();
+    // m2.setId(2);
+    // m2.setNome('Novalgina');
+    // //m2.setValidade(DateTime.now());
+    // m2.setPrincipio("");
+    // m2.setQuantidade(60);
+    // m2.setGrandeza(Grandeza.ML);
+    // medicamentos.add(m2);
+    medicamentos.addAll(lista);
   }
 
   @action
@@ -52,13 +75,13 @@ abstract class _MedicamentoController with Store {
 
     medicamentos.add(medicamento);
 
-    medicamento = Medicamento();
+    medicamento = Medicamento.empty();
   }
 
   @action
   exclui(Medicamento medicamento) {
     medicamentos.removeWhere((element) => element.id == medicamento.id);
-    medicamento = Medicamento();
+    medicamento = Medicamento.empty();
   }
 
   @action

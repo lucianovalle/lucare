@@ -52,11 +52,13 @@ mixin _$MedicamentoController on _MedicamentoController, Store {
       ActionController(name: '_MedicamentoController', context: context);
 
   @override
-  dynamic consultaMedicamentos() {
+  dynamic consultaMedicamentos() async {
     final _$actionInfo = _$_MedicamentoControllerActionController.startAction(
         name: '_MedicamentoController.consultaMedicamentos');
     try {
-      return super.consultaMedicamentos();
+      MedicamentosService service = MedicamentosService();
+      List<Medicamento> lista = await service.consltarMedicamentos();
+      return super.consultaMedicamentosAdd(lista);
     } finally {
       _$_MedicamentoControllerActionController.endAction(_$actionInfo);
     }
