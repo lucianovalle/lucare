@@ -9,8 +9,9 @@ import 'package:lucare/services/http_interceptors.dart';
 class MedicamentosService {
   Logger logger = Logger();
 
-  static const String url = "http://localhost:8080/medicamentos";
-  //"http://ec2-3-21-129-50.us-east-2.compute.amazonaws.com:8080/medicamentos";
+  static const String url =
+      "http://ec2-3-21-129-50.us-east-2.compute.amazonaws.com:8080/medicamentos";
+  //"http://localhost:8080/medicamentos";
 
   http.Client client =
       InterceptedClient.build(interceptors: [LoggingInterceptor()]);
@@ -42,5 +43,31 @@ class MedicamentosService {
     } else {
       throw Exception('falhou na busca de medicamentos');
     }
+  }
+
+  Future<bool> atualizar(Medicamento medicamentol) async {
+    String journalJSON = json.encode(medicamentol.toMapAualiza());
+
+    http.Response response = await client.put(
+      Uri.parse(url),
+      headers: {'Content-type': 'application/json'},
+      body: journalJSON,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<bool> exclui(String id) async {
+    http.Response response = await client.delete(Uri.parse("$url/$id"));
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+
+    return false;
   }
 }

@@ -80,6 +80,8 @@ mixin _$MedicamentoController on _MedicamentoController, Store {
     final _$actionInfo = _$_MedicamentoControllerActionController.startAction(
         name: '_MedicamentoController.exclui');
     try {
+      MedicamentosService service = MedicamentosService();
+      service.exclui(medicamento.id.toString());
       return super.exclui(medicamento);
     } finally {
       _$_MedicamentoControllerActionController.endAction(_$actionInfo);

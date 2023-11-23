@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:lucare/medicamento/model/medicamento.dart';
 
 class MedicamentoTile extends StatelessWidget {
@@ -15,8 +14,6 @@ class MedicamentoTile extends StatelessWidget {
     final foto = medicamento.foto == '' || medicamento.foto.isEmpty
         ? const CircleAvatar(child: Icon(Icons.person))
         : CircleAvatar(backgroundImage: NetworkImage(medicamento.foto));
-
-    var format = DateFormat('dd/MM/yyyy');
 
     return Card(
       child: ListTile(

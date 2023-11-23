@@ -4,8 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lucare/shared/app_module.dart';
 
 void main() {
-  // MedicamentosService service = MedicamentosService();
-  // service.consltarMedicamentos();
   runApp(
     ModularApp(
       module: AppModule(),
@@ -27,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: const [Locale('pt', 'BR')],
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Saúde Familiar',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

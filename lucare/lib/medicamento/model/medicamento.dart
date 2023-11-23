@@ -33,6 +33,19 @@ class Medicamento {
     };
   }
 
+  Map<String, dynamic> toMapAualiza() {
+    return {
+      "id": id,
+      "nome": nome,
+      "quantidade": quantidade,
+      "utilizado": utilizado,
+      "validade": validade,
+      "grandeza": grandeza.name,
+      "principio": principio.toString(),
+      "descricao": descricao.toString()
+    };
+  }
+
   Medicamento.fromMap(Map<String, dynamic> map)
       : id = map["id"],
         nome = map["nome"],

@@ -17,19 +17,19 @@ class MedicamentoForm extends StatefulWidget {
 class _MedicamentoFormState extends State<MedicamentoForm> {
   final DateFormat format = DateFormat('dd/MM/yyyy');
 
-  final MedicamentoController controller = Modular.get<MedicamentoController>();
+  MedicamentoController controller = Modular.get<MedicamentoController>();
 
-  final TextEditingController _controllerNome = TextEditingController();
+  TextEditingController _controllerNome = TextEditingController();
 
-  final TextEditingController _controllerDescricao = TextEditingController();
+  TextEditingController _controllerDescricao = TextEditingController();
 
-  final TextEditingController _controllerPrincipio = TextEditingController();
+  TextEditingController _controllerPrincipio = TextEditingController();
 
-  final TextEditingController _controllerQuantidade = TextEditingController();
+  TextEditingController _controllerQuantidade = TextEditingController();
 
-  final TextEditingController _controllerData = TextEditingController();
+  TextEditingController _controllerData = TextEditingController();
 
-  final TextEditingController _controllerFoto = TextEditingController();
+  TextEditingController _controllerFoto = TextEditingController();
 
   final _grandezaLista = ["COMPRIMIDO", "ML"];
 
@@ -37,7 +37,7 @@ class _MedicamentoFormState extends State<MedicamentoForm> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final Map<String, String> _formData = {};
+  Medicamento medicamento = Medicamento.empty();
 
   @override
   void dispose() {
@@ -61,19 +61,32 @@ class _MedicamentoFormState extends State<MedicamentoForm> {
     medicamento.descricao = _controllerDescricao.value.text;
     medicamento.validade = _controllerData.value.text;
 
-    service.incluirMedicamento(medicamento);
+    if (Modular.args.data != null) {
+      Medicamento medicamentoID = Modular.args.data;
+      medicamento.id = medicamentoID.id;
+      service.atualizar(medicamento);
+    } else {
+      service.incluirMedicamento(medicamento);
+    }
     Modular.to.pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    //Object? medicamento = ModalRoute.of(context)!.settings.arguments;
-    Medicamento? medicamento = Modular.args.data;
-
-    if (medicamento != null) {
+    if (Modular.args.data != null) {
+      medicamento = Modular.args.data;
       controller.setMedicamento(medicamento);
-      _formData['grandeza'] = medicamento.grandeza.name;
-      _formData['quantidade'] = medicamento.quantidade.toString();
+      _controllerNome = TextEditingController(text: medicamento.nome);
+      _controllerQuantidade =
+          TextEditingController(text: medicamento.quantidade.toString());
+      _controllerPrincipio = TextEditingController(text: medicamento.principio);
+      _controllerQuantidade =
+          TextEditingController(text: medicamento.quantidade.toString());
+      _controllerData = TextEditingController(text: medicamento.validade);
+      _controllerFoto = TextEditingController(text: medicamento.foto);
+      _controllerDescricao = TextEditingController(text: medicamento.descricao);
+
+      _grandezaSelecionada = medicamento.grandeza.name;
     } else {
       controller.setMedicamento(Medicamento.empty());
     }
@@ -91,17 +104,14 @@ class _MedicamentoFormState extends State<MedicamentoForm> {
             children: <Widget>[
               TextFormField(
                 controller: _controllerNome,
-                initialValue: medicamento?.nome,
                 decoration: const InputDecoration(labelText: "Nome:"),
               ),
               TextFormField(
                 controller: _controllerDescricao,
-                initialValue: medicamento?.descricao,
                 decoration: const InputDecoration(labelText: "Descrição:"),
               ),
               TextFormField(
                 controller: _controllerPrincipio,
-                initialValue: medicamento?.principio,
                 decoration:
                     const InputDecoration(labelText: "Princípio ativo:"),
               ),
@@ -122,11 +132,10 @@ class _MedicamentoFormState extends State<MedicamentoForm> {
               ),
               TextFormField(
                 controller: _controllerQuantidade,
-                initialValue: _formData['quantidade'],
                 decoration: const InputDecoration(labelText: "Quantidade:"),
               ),
               DropdownButtonFormField(
-                value: _formData['grandeza'],
+                value: _grandezaSelecionada,
                 decoration: const InputDecoration(labelText: "Grandeza:"),
                 items: _grandezaLista
                     .map((e) => DropdownMenuItem(
@@ -142,7 +151,6 @@ class _MedicamentoFormState extends State<MedicamentoForm> {
               ),
               TextFormField(
                 controller: _controllerFoto,
-                initialValue: medicamento?.foto,
                 decoration: const InputDecoration(labelText: "Foto:"),
               ),
               const SizedBox(height: 15),

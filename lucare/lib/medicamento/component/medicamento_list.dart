@@ -17,6 +17,7 @@ class MedicamentoList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Medicamentos'),
+        backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),

@@ -12,9 +12,9 @@ import 'package:lucare/shared/routes/app_routes.dart';
 class AppModule extends Module {
   @override
   void binds(i) {
-    i.add(MedicamentoController.new);
-    i.add(ConsultaController.new);
-    i.add(MediacaoController.new);
+    i.addLazySingleton(MedicamentoController.new);
+    i.addLazySingleton(ConsultaController.new);
+    i.addLazySingleton(MediacaoController.new);
   }
 
   @override
