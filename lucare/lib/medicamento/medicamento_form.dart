@@ -88,81 +88,90 @@ class _MedicamentoFormState extends State<MedicamentoForm> {
 
       _grandezaSelecionada = medicamento.grandeza.name;
     } else {
+      _grandezaSelecionada = Grandeza.COMPRIMIDO.name;
       controller.setMedicamento(Medicamento.empty());
     }
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 231, 228, 228),
       appBar: AppBar(
         title: const Text("Medicamento"),
+        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Form(
-          key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _controllerNome,
-                decoration: const InputDecoration(labelText: "Nome:"),
-              ),
-              TextFormField(
-                controller: _controllerDescricao,
-                decoration: const InputDecoration(labelText: "Descrição:"),
-              ),
-              TextFormField(
-                controller: _controllerPrincipio,
-                decoration:
-                    const InputDecoration(labelText: "Princípio ativo:"),
-              ),
-              TextFormField(
-                controller: _controllerData,
-                decoration: const InputDecoration(labelText: "Validade:"),
-                onTap: () async {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  var date = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2015),
-                      lastDate: DateTime(2100));
-                  if (date != null) {
-                    _controllerData.text = format.format(date);
-                  }
-                },
-              ),
-              TextFormField(
-                controller: _controllerQuantidade,
-                decoration: const InputDecoration(labelText: "Quantidade:"),
-              ),
-              DropdownButtonFormField(
-                value: _grandezaSelecionada,
-                decoration: const InputDecoration(labelText: "Grandeza:"),
-                items: _grandezaLista
-                    .map((e) => DropdownMenuItem(
-                          child: Text(e),
-                          value: e,
-                        ))
-                    .toList(),
-                onChanged: (val) {
-                  setState(() {
-                    _grandezaSelecionada = val as String;
-                  });
-                },
-              ),
-              TextFormField(
-                controller: _controllerFoto,
-                decoration: const InputDecoration(labelText: "Foto:"),
-              ),
-              const SizedBox(height: 15),
-              FractionallySizedBox(
-                widthFactor: 1, // means 100%, you can change this to 0.8 (80%)
-                child: BotaoElevated(
-                  rotulo: 'Salvar',
-                  icone: Icons.save,
-                  salva: salvar,
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Form(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: _controllerNome,
+                  decoration: const InputDecoration(labelText: "Nome:"),
                 ),
-              ),
-            ],
+                TextFormField(
+                  controller: _controllerDescricao,
+                  decoration: const InputDecoration(labelText: "Descrição:"),
+                ),
+                TextFormField(
+                  controller: _controllerPrincipio,
+                  decoration:
+                      const InputDecoration(labelText: "Princípio ativo:"),
+                ),
+                TextFormField(
+                  controller: _controllerData,
+                  decoration: const InputDecoration(labelText: "Validade:"),
+                  onTap: () async {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    var date = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2015),
+                        lastDate: DateTime(2100));
+                    if (date != null) {
+                      _controllerData.text = format.format(date);
+                    }
+                  },
+                ),
+                TextFormField(
+                  controller: _controllerQuantidade,
+                  decoration: const InputDecoration(labelText: "Quantidade:"),
+                ),
+                DropdownButtonFormField(
+                  value: _grandezaSelecionada,
+                  decoration: const InputDecoration(labelText: "Grandeza:"),
+                  items: _grandezaLista
+                      .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e),
+                          ))
+                      .toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      _grandezaSelecionada = val as String;
+                    });
+                  },
+                ),
+                TextFormField(
+                  controller: _controllerFoto,
+                  decoration: const InputDecoration(labelText: "Foto:"),
+                ),
+                const SizedBox(height: 15),
+                FractionallySizedBox(
+                  widthFactor:
+                      1, // means 100%, you can change this to 0.8 (80%)
+                  child: BotaoElevated(
+                    rotulo: 'Salvar',
+                    icone: Icons.save,
+                    salva: salvar,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

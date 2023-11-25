@@ -50,6 +50,7 @@ class _BarItemState extends State {
       ],
       currentIndex: _pagina,
       onTap: _selecionaPagina,
+      selectedItemColor: Colors.white,
     );
   }
 }

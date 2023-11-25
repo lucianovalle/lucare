@@ -57,8 +57,12 @@ class ConsultaForm extends StatelessWidget {
     var buttonSize = const Size(56.0, 56.0);
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 231, 228, 228),
       appBar: AppBar(
         title: const Text("Consulta"),
+        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
       ),
       floatingActionButton: SpeedDial(
         icon: Icons.add,

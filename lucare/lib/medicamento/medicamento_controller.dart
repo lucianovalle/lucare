@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:lucare/medicamento/model/medicamento.dart';
 import 'package:lucare/services/medicamentos_service.dart';
-import 'package:lucare/shared/models/grandeza.dart';
 import 'package:mobx/mobx.dart';
 
 part 'medicamento_controller.g.dart';
@@ -45,6 +44,7 @@ abstract class _MedicamentoController with Store {
 
   @action
   consultaMedicamentosAdd(List<Medicamento> lista) {
+    medicamentos.clear();
     medicamentos.addAll(lista);
   }
 

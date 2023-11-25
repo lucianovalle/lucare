@@ -6,11 +6,10 @@ class BotaoElevated extends StatelessWidget {
   void Function() salva;
 
   BotaoElevated(
-      {Key? key,
+      {super.key,
       required this.rotulo,
       this.icone = Icons.save,
-      required this.salva})
-      : super(key: key);
+      required this.salva});
 
   @override
   Widget build(BuildContext context) {

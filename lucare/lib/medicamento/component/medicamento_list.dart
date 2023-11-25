@@ -7,16 +7,24 @@ import 'package:lucare/medicamento/model/medicamento.dart';
 import 'package:lucare/shared/components/bar_item.dart';
 import 'package:lucare/shared/routes/app_routes.dart';
 
-class MedicamentoList extends StatelessWidget {
+class MedicamentoList extends StatefulWidget {
   MedicamentoList({super.key});
 
+  @override
+  State<MedicamentoList> createState() => _MedicamentoListState();
+}
+
+class _MedicamentoListState extends State<MedicamentoList> {
   final MedicamentoController controller = Modular.get<MedicamentoController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 231, 228, 228),
       appBar: AppBar(
         title: const Text('Medicamentos'),
+        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
+        centerTitle: true,
         backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
@@ -31,11 +39,14 @@ class MedicamentoList extends StatelessWidget {
       ),
       body: Observer(
         builder: (_) {
-          return ListView.builder(
-            padding: const EdgeInsets.all(10),
-            itemCount: controller.medicamentos.length,
-            itemBuilder: (ctx, i) => MedicamentoTile(
-                controller.medicamentos.elementAt(i), editar, excluir),
+          return RefreshIndicator(
+            onRefresh: () async => await controller.consultaMedicamentos(),
+            child: ListView.builder(
+              padding: const EdgeInsets.all(10),
+              itemCount: controller.medicamentos.length,
+              itemBuilder: (ctx, i) => MedicamentoTile(
+                  controller.medicamentos.elementAt(i), editar, excluir),
+            ),
           );
         },
       ),

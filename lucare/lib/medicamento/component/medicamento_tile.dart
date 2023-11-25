@@ -6,8 +6,8 @@ class MedicamentoTile extends StatelessWidget {
   final Function(Medicamento medicamento) editar;
   final Function(Medicamento medicamento) excluir;
 
-  const MedicamentoTile(this.medicamento, this.editar, this.excluir, {Key? key})
-      : super(key: key);
+  const MedicamentoTile(this.medicamento, this.editar, this.excluir,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class MedicamentoTile extends StatelessWidget {
         isThreeLine: true,
         title: Text(medicamento.nome),
         subtitle: Text(
-            'Princípio ativo: ${medicamento.principio}\nValidade:  ${medicamento.validade} \nQuantidade: ${medicamento.quantidade} - ${medicamento.grandeza.name}'),
+            'Princípio ativo: ${medicamento.principio}\nValidade: ${medicamento.validade}\nQuantidade: ${medicamento.quantidade} - ${medicamento.grandeza.name}\nUtilizado:${medicamento.utilizado}\nDescrição: ${medicamento.descricao}'),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

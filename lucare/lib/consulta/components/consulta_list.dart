@@ -19,8 +19,12 @@ class ConsultaList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 231, 228, 228),
       appBar: AppBar(
         title: const Text('Consultas'),
+        titleTextStyle: const TextStyle(color: Colors.white, fontSize: 22),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),

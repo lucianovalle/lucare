@@ -19,9 +19,9 @@ class AppModule extends Module {
 
   @override
   void exportedBinds(i) {
-    i.add(MedicamentoController.new);
-    i.add(ConsultaController.new);
-    i.add(MediacaoController.new);
+    i.addLazySingleton(MedicamentoController.new);
+    i.addLazySingleton(ConsultaController.new);
+    i.addLazySingleton(MediacaoController.new);
   }
 
   @override
